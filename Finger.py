@@ -6,4 +6,4 @@ class Finger:
     '''
 
     def __init__(self):
-        self.landmarks = [Landmark(0, 0, 0, 0)] * 5
+        self.landmarks = [Landmark(0, 0, 0, 0)] * 4
