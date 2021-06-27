@@ -73,9 +73,10 @@ def interpret(lmList):
     fingerPositions = createPositionTuple(lmList)
     if fingerPositions == (2, 2, 2, 2):
         #B
+        pass
     elif fingerPositions == (2, 2, 2, 0):
         #W
-
+        pass
     elif fingerPositions == (2, 2, 0, 0):
         # If depth of middle finger is closer to camera:
         # K
@@ -85,7 +86,7 @@ def interpret(lmList):
         # U
         # Else:
         # V
-
+        pass
     elif fingerPositions == (2, 0, 0, 0):
         # If thumb out:
         # L
@@ -93,21 +94,25 @@ def interpret(lmList):
         # X
         # Else
         # D
-
+        pass
     elif fingerPositions == (0, 2, 2, 2):
         #F
-
+        pass
     elif fingerPositions == (0, 0, 0, 2):
         # If thumb out:
         #     Y
         # Else
         #     I
+        pass
     elif fingerPositions == (1, 1, 1, 1):
         #E
+        pass
     elif fingerPositions == (1, 1, 1, 0):
         #M
+        pass
     elif fingerPositions == (1, 1, 0, 0):
         #N
+        pass
     elif fingerPositions == (0, 0, 0, 0):
         # If thumb right of index finger:
         # A
@@ -115,8 +120,10 @@ def interpret(lmList):
         # S
         # Else: (Might need to change to t being behind index finger)
         # T
+        pass
 
     else:
         #C and O
         #P and Q
         #G and H
+        pass
