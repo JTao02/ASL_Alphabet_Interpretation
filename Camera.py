@@ -8,7 +8,6 @@ ds_factor=0.6
 
 class Camera():
     def __init__(self):
-        print("BADDIEEEEE")
         self.video = cv2.VideoCapture(0)
         self.letters = "TEST"
         self.curr_time = time.time()
