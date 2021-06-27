@@ -1,4 +1,3 @@
-
 class Landmark:
     '''
     Stores a landmarks ID and position

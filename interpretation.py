@@ -68,3 +68,55 @@ def analyzePinkyFinger(lmList):
     elif PINKY_FINGER_TIP[2] < PINKY_FINGER_DIP[2]:
         return 2
     return 1
+
+def interpret(lmList):
+    fingerPositions = createPositionTuple(lmList)
+    if fingerPositions == (2, 2, 2, 2):
+        #B
+    elif fingerPositions == (2, 2, 2, 0):
+        #W
+
+    elif fingerPositions == (2, 2, 0, 0):
+        # If depth of middle finger is closer to camera:
+        # K
+        # If index tip is crossing middle tip:
+        # R
+        # If index tip is near middle tip:
+        # U
+        # Else:
+        # V
+
+    elif fingerPositions == (2, 0, 0, 0):
+        # If thumb out:
+        # L
+        # If landmark 8 is lower than 7
+        # X
+        # Else
+        # D
+
+    elif fingerPositions == (0, 2, 2, 2):
+        #F
+
+    elif fingerPositions == (0, 0, 0, 2):
+        # If thumb out:
+        #     Y
+        # Else
+        #     I
+    elif fingerPositions == (1, 1, 1, 1):
+        #E
+    elif fingerPositions == (1, 1, 1, 0):
+        #M
+    elif fingerPositions == (1, 1, 0, 0):
+        #N
+    elif fingerPositions == (0, 0, 0, 0):
+        # If thumb right of index finger:
+        # A
+        # If thumb is horizontal:
+        # S
+        # Else: (Might need to change to t being behind index finger)
+        # T
+
+    else:
+        #C and O
+        #P and Q
+        #G and H

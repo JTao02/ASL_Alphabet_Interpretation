@@ -1,6 +1,5 @@
 from Landmark import Landmark
 
-
 class Finger:
     '''
     Creates a finger object with 4 landmarks
