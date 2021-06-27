@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 from Finger import Finger
+from interpretation import interpret
 
 
 def main():
@@ -57,6 +58,9 @@ def main():
                     cx, cy = int(lm.x*w), int(lm.y*h)
 
                     lmList.append([id, cx, cy])
+
+                # writes text to screen
+                cv2.putText(img, str(interpret(lmList)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
 
                 # draw hand landmarks and connections
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
