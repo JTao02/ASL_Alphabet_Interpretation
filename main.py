@@ -55,9 +55,9 @@ def main():
                 for id, lm in enumerate(handLms.landmark):
                     h, w, c = img.shape                 # get height, width, depth
                     # convert to x, y pixel values
-                    cx, cy = int(lm.x*w), int(lm.y*h)
+                    cx, cy, cz = int(lm.x*w), int(lm.y*h), int(lm.z*c)
 
-                    lm_list.append([id, cx, cy, lm.z])
+                    lm_list.append([id, cx, cy, cz])
 
                 # writes text to screen
                 cv2.putText(img, str(interpret(lm_list)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
