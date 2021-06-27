@@ -1,4 +1,4 @@
-import Landmark
+from Landmark import Landmark
 
 
 class Finger:

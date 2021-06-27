@@ -1,17 +1,17 @@
 import cv2
 import mediapipe as mp
 import time
-import Finger
-
-# Finger objects
-Thumb = Finger()
-Index = Finger()
-Middle = Finger()
-Ring = Finger()
-Pinky = Finger()
+from Finger import Finger
 
 
 def main():
+
+    # Finger objects
+    THUMB = Finger()
+    INDEX = Finger()
+    MIDDLE = Finger()
+    RING = Finger()
+    PINKY = Finger()
 
     # captures video from webcam
     # NOTE: input value can vary between -1, 0, 1, 2 (differs per device, 0 or 1 is common)
