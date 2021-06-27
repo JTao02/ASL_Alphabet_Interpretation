@@ -18,7 +18,6 @@ def main():
     pTime = 0 # previous time
     cTime = 0 # current time
 
-    
     while True:
         # reads image from webcam
         success, img = cap.read()
@@ -70,5 +69,5 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
-if "name" == "__main__":
-    main()
+
+main()
