@@ -1,10 +1,23 @@
 VERTICAL_ERROR_MARGIN = 10 # FOR FOUR FINGERS: number of pixels allowed to be considered same "level"
 
-# input: landmark list of 21 landmarks
-# output:
-#   -> 0: finger is all the way down
-#   -> 2: finger is all the way up
-#   -> 1: finger is between up and down (in the middle) 
+
+def createPositionTuple(lmList):
+    '''
+    Input: landmark list of 21 landmarks
+    Output: Tuple of (IndexPosition, MiddlePosition, RingPosition, PinkyPosition)
+    
+    Different Positions:
+       -> 0: finger is all the way down
+       -> 2: finger is all the way up
+       -> 1: finger is between up and down (in the middle) 
+    '''
+    a = analyzeIndexFinger(lmList)
+    b = analyzeMiddleFinger(lmList)
+    c = analyzeRingFinger(lmList)
+    d = analyzePinkyFinger(lmList)
+    return (a, b, c, d)
+
+
 def analyzeIndexFinger(lmList):
     INDEX_FINGER_TIP = lmList[8]
     INDEX_FINGER_DIP = lmList[7]
