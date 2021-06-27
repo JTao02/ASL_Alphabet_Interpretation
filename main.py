@@ -43,8 +43,8 @@ def main():
 
             for handLms in results.multi_hand_landmarks:
                 # creates list of all landmarks for easier indexing
-                # list will have 21 values -> lmList[0] will be first landmark
-                lmList = []
+                # list will have 21 values -> lm_list[0] will be first landmark
+                lm_list = []
 
                 # id corresponds to landmark #
                 #   -> 21 landmarks in total (4 on non-thumb fingers, rest on thumb and palm)
@@ -57,10 +57,10 @@ def main():
                     # convert to x, y pixel values
                     cx, cy = int(lm.x*w), int(lm.y*h)
 
-                    lmList.append([id, cx, cy])
+                    lm_list.append([id, cx, cy])
 
                 # writes text to screen
-                cv2.putText(img, str(interpret(lmList)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
+                cv2.putText(img, str(interpret(lm_list)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
 
                 # draw hand landmarks and connections
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
