@@ -82,8 +82,8 @@ def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Fing
             finger_num = id - 1
 
             THUMB.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
-            print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
-                    THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
+            # print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
+            #         THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
 
         # landmarks on index
         elif (id >= 5 and id <= 8):
@@ -129,7 +129,7 @@ def interpret(lm_list) -> 'string':
 
     fingerPositions = createPositionTuple(lm_list)
 
-    print(lm_list[1],  " ",  lm_list[2],  " ", lm_list[3],  " ", lm_list[4])
+    #print(lm_list[1],  " ",  lm_list[2],  " ", lm_list[3],  " ", lm_list[4])
 
     if fingerPositions == (2, 2, 2, 2):
         # B

@@ -16,7 +16,16 @@ class Camera():
     def end(self):
         self.video.release()
         cv2.destroyAllWindows()
-    
+
+    def add_space(self):
+        self.letters += " "
+
+    def delete(self):
+        self.letters = self.letters[:-1]
+
+    def clear(self):
+        self.letters = ""
+
     def get_frame(self):
 
         # captures video from webcam
@@ -76,6 +85,7 @@ class Camera():
                 # countdown timer
                 self.curr_time = time.time()
                 diff_time = self.curr_time - self.prev_time
+                print(self.curr_time, self.prev_time)
                 if diff_time < 1:
                     display_time = 3
                 elif diff_time < 2:
@@ -115,12 +125,12 @@ class Camera():
             return None
 
         #############
-        img=cv2.resize(img,None,fx=ds_factor,fy=ds_factor,interpolation=cv2.INTER_AREA)
-        gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-        face_rects=face_cascade.detectMultiScale(gray,1.3,5)
-        for (x,y,w,h) in face_rects:
-        	cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
-        	break
+        # img=cv2.resize(img,None,fx=ds_factor,fy=ds_factor,interpolation=cv2.INTER_AREA)
+        # gray=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+        # face_rects=face_cascade.detectMultiScale(gray,1.3,5)
+        # for (x,y,w,h) in face_rects:
+        # 	cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
+        # 	break
         ret, jpeg = cv2.imencode('.jpg', img)
         return jpeg.tobytes()
 
