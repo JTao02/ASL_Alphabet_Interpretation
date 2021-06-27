@@ -1,6 +1,15 @@
 import cv2
 import mediapipe as mp
 import time
+import Finger
+
+# Finger objects
+Thumb = Finger()
+Index = Finger()
+Middle = Finger()
+Ring = Finger()
+Pinky = Finger()
+
 
 def main():
 
@@ -15,8 +24,8 @@ def main():
     mpDraw = mp.solutions.drawing_utils
 
     # used to calculate FPS
-    pTime = 0 # previous time
-    cTime = 0 # current time
+    pTime = 0  # previous time
+    cTime = 0  # current time
 
     while True:
         # reads image from webcam
@@ -25,7 +34,7 @@ def main():
         # converts default image value to RGB value
         # NOTE: when printing back to the screen, use default value (img) NOT imgRGB
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        imgRGB.flags.writeable = False # improves performance
+        imgRGB.flags.writeable = False  # improves performance
         # use Mediapipe to process converted RGB value
         results = hands.process(imgRGB)
 
@@ -44,12 +53,13 @@ def main():
                 #   -> to convert to pixel value, multiple by width and height of screen
                 for id, lm in enumerate(handLms.landmark):
                     h, w, c = img.shape                 # get height, width, depth
-                    cx, cy = int(lm.x*w), int(lm.y*h) # convert to x, y pixel values
+                    # convert to x, y pixel values
+                    cx, cy = int(lm.x*w), int(lm.y*h)
 
                     lmList.append([id, cx, cy])
 
-                mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS) # draw hand landmarks and connections
- 
+                # draw hand landmarks and connections
+                mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
         # print FPS on screen (not console)
         # cTime = time.time()
@@ -68,5 +78,6 @@ def main():
     # cleanup
     cap.release()
     cv2.destroyAllWindows()
+
 
 main()
