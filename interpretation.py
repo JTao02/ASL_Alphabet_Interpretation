@@ -186,7 +186,7 @@ def interpret(lm_list) -> 'string':
 
     if fingerPositions == (2, 2, 2, 2):
         # B
-        return "B"
+        return checkLetters_B_C(lm_list)
     elif fingerPositions == (2, 2, 2, 0):
         # W
         return "W"
@@ -294,7 +294,6 @@ def check_A_S_T(lm_list):
     MIDDLE_FINGER_DIP = lm_list[11]
     INDEX_DIP = lm_list[7]
 
-    print(abs(INDEX_TIP[2] - INDEX_MCP[2]))
     if (THUMB_TIP[1] < INDEX_TIP[1]):
         return "A"
     elif (THUMB_TIP[1] > MIDDLE_FINGER_DIP[1]) and analyzeMiddleFingerH(lm_list) < 1:
@@ -336,7 +335,19 @@ def checkLetters_E_O(lm_list):
 
     if abs(THUMB_TIP[1] - INDEX_FINGER_TIP[1]) < VERTICAL_ERROR_MARGIN:
         return "O"
+    elif abs(THUMB_TIP[1] - INDEX_FINGER_TIP[1]) > 60:
+        return
     else:
         return "E"
 
     return ""
+
+
+def checkLetters_B_C(lm_list):
+    THUMB_TIP = lm_list[4]
+    INDEX_FINGER_TIP = lm_list[8]
+
+    if THUMB_TIP[1] > INDEX_FINGER_TIP[1]:
+        return "B"
+    elif analyzeIndexFingerH(lm_list) == 2 and analyzeMiddleFingerH(lm_list) == 2 and analyzeRingFingerH(lm_list) == 2 and analyzePinkyFingerH(lm_list) == 2:
+        return "C"
