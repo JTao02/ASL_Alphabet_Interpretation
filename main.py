@@ -31,7 +31,7 @@ def checkSigns(img):
 
             # Checking for U
         if((abs(index.landmarks[num].x-middle.landmarks[num].x) > 0.07) or (abs(index.landmarks[num].y-middle.landmarks[num].y) > 0.04)
-            or (abs(index.landmarks[num].y-middle.landmarks[num].y) < 0.003) or
+           or (abs(index.landmarks[num].y-middle.landmarks[num].y) < 0.003) or
            (abs(index.landmarks[4].y-ring.landmarks[4].y) < 0.1) or (abs(index.landmarks[4].x-middle.landmarks[4].x)) > 0.05):
             isU = False
 
@@ -42,8 +42,9 @@ def checkSigns(img):
 
             # Checking for Y
         if((thumb.landmarks[1].y < index.landmarks[4].y) or (thumb.landmarks[1].y < middle.landmarks[4].y)
-           or (thumb.landmarks[1].y < ring.landmarks[4].y) or pinky.landmarks[1].y > thumb.landmarks[1].y or
-           abs(pinky.landmarks[1].y-pinky.landmarks[4].y < 0.15) or abs(thumb.landmarks[1].y-thumb.landmarks[4].y < 0.15)):
+           or (thumb.landmarks[1].y < ring.landmarks[4].y) or thumb.landmarks[1].y < pinky.landmarks[4].y or
+           abs(pinky.landmarks[1].y-pinky.landmarks[4].y < 0.15) or abs(thumb.landmarks[1].x-thumb.landmarks[4].x < 0.07) or
+           abs(thumb.landmarks[1].y-index.landmarks[1].y) < 0.15):
             isY = False
 
             # Checking for o
@@ -52,10 +53,11 @@ def checkSigns(img):
             isO = False
 
             # Checking for I
-        if((thumb.landmarks[1].y < index.landmarks[4].y) or (thumb.landmarks[1].y < middle.landmarks[4].y)
-           or (thumb.landmarks[1].y < ring.landmarks[4].y) or pinky.landmarks[1].y > thumb.landmarks[1].y or
-           abs(pinky.landmarks[1].y-pinky.landmarks[4].y < 0.15) or abs(thumb.landmarks[1].y-thumb.landmarks[4].y < 0.15)):
-            isY = False
+        if((thumb.landmarks[1].y-pinky.landmarks[1].y) < 0.13 or (thumb.landmarks[1].y < middle.landmarks[1].y) or
+           (thumb.landmarks[1].y < index.landmarks[1].y) or thumb.landmarks[1].y < pinky.landmarks[1].y or thumb.landmarks[1].y <
+           ring.landmarks[1].y or abs(
+               thumb.landmarks[1].y - thumb.landmarks[4].y) < 0.1 or abs(thumb.landmarks[1].x-thumb.landmarks[4].x) < 0.01):
+            isI = False
 
     if (isC):
         # print("Letter C")
@@ -76,6 +78,10 @@ def checkSigns(img):
     elif (isO):
         # print("Letter O")
         cv2.putText(img, "O", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
+                    3)
+    elif (isI):
+        # print("Letter I")
+        cv2.putText(img, "I", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
                     3)
 
 
