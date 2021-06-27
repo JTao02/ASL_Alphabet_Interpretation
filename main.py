@@ -30,9 +30,9 @@ def main():
         # use Mediapipe to process converted RGB value
         results = hands.process(imgRGB)
 
-        if results.multiHandsLandmarks:
+        if results.multi_hand_landmarks:
 
-            for handLms in results.multiHandsLandmarks:
+            for handLms in results.multi_hand_landmarks:
                 # creates list of all landmarks for easier indexing
                 # list will have 21 values -> lmList[0] will be first landmark
                 lmList = []
@@ -70,5 +70,5 @@ def main():
     cap.release()
     cv2.destroyAllWindows()
 
-if "name" == "__main__":
-    main()
+#if "name" == "__main__":
+main()
