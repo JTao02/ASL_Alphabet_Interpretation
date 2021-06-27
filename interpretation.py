@@ -185,56 +185,25 @@ def interpret(lm_list) -> 'string':
     print(fingerPositions)
 
     if fingerPositions == (2, 2, 2, 2):
-        # B
         return checkLetters_B_C(lm_list)
     elif fingerPositions == (2, 2, 2, 0):
-        # W
         return "W"
     elif fingerPositions == (2, 2, 0, 0):
-        # If depth of middle finger is closer to camera:
-        # K
-
-        # If index tip is crossing middle tip:
-        # R
-        # If index tip is near middle tip:
-        # U
-        # Else:
-        # V
         return check_K_R_U_V(THUMB, INDEX, MIDDLE, RING, PINKY)
     elif fingerPositions == (2, 0, 0, 0):
-        # If thumb out:
-        # L
-        # If landmark 8 is lower than 7
-        # X
-        # Else
-        # D
         return check_L_X_D_P(lm_list)
     elif fingerPositions == (0, 2, 2, 2):
-        # F
         return "F"
     elif fingerPositions == (0, 0, 0, 2):
-        # If thumb out:
-        #     Y
-        # Else
-        #     I
         return check_Y_I(THUMB, INDEX, MIDDLE, RING, PINKY)
     elif fingerPositions == (1, 1, 1, 1):
-        # E
         return checkLetters_E_O(lm_list)
     elif fingerPositions == (1, 1, 1, 0):
-        # M
         return "M"
     elif fingerPositions == (1, 1, 0, 0):
-        # N
         return "N"
     elif fingerPositions == (0, 0, 0, 0):
         return check_A_S_T(lm_list)
-        # If thumb right of index finger:
-        # A
-        # If thumb is horizontal:
-        # S
-        # Else: (Might need to change to t being behind index finger)
-        # T
     else:
         if(checkLetters_G_H(lm_list) != ""):
             return checkLetters_G_H(lm_list)

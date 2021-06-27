@@ -12,7 +12,7 @@ def delete(text):
 
 def clear(text):
     return ""
-    
+
 def main():
 
     # Finger objects
