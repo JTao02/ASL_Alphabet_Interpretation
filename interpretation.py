@@ -1,5 +1,6 @@
-VERTICAL_ERROR_MARGIN = 10 # FOR FOUR FINGERS: number of pixels allowed to be considered same "level"
+from Finger import Finger
 
+VERTICAL_ERROR_MARGIN = 10 # FOR FOUR FINGERS: number of pixels allowed to be considered same "level"
 
 def createPositionTuple(lmList):
     '''
@@ -69,14 +70,14 @@ def analyzePinkyFinger(lmList):
         return 2
     return 1
 
-def interpret(lmList):
+def interpret(lmList) -> 'string':
     fingerPositions = createPositionTuple(lmList)
     if fingerPositions == (2, 2, 2, 2):
         #B
-        pass
+        return "B"
     elif fingerPositions == (2, 2, 2, 0):
         #W
-        pass
+        return "W"
     elif fingerPositions == (2, 2, 0, 0):
         # If depth of middle finger is closer to camera:
         # K
@@ -97,7 +98,7 @@ def interpret(lmList):
         pass
     elif fingerPositions == (0, 2, 2, 2):
         #F
-        pass
+        return "F"
     elif fingerPositions == (0, 0, 0, 2):
         # If thumb out:
         #     Y
@@ -106,13 +107,13 @@ def interpret(lmList):
         pass
     elif fingerPositions == (1, 1, 1, 1):
         #E
-        pass
+        return "E"
     elif fingerPositions == (1, 1, 1, 0):
         #M
-        pass
+        return "M"
     elif fingerPositions == (1, 1, 0, 0):
         #N
-        pass
+        return "N"
     elif fingerPositions == (0, 0, 0, 0):
         # If thumb right of index finger:
         # A
