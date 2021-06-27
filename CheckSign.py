@@ -1,18 +1,20 @@
-import cv2
-import mediapipe as mp
-import time
-from Finger import Finger
-from Landmark import Landmark
-# from CheckSign import checkSigns
-
-# Finger objects
-thumb = Finger()
-index = Finger()
-middle = Finger()
-ring = Finger()
-pinky = Finger()
+# from Finger import Finger
+# from Landmark import Landmark
+# from main import cv2, main
+# import mediapipe as mp
+# import time
 
 
+# class CheckSign:
+'''
+    Checks sign
+    '''
+
+# Detects
+
+
+# Check sign method
+'''
 def checkSigns(img):
     # Loop through 4
     isC = True
@@ -20,7 +22,6 @@ def checkSigns(img):
     isV = True
     isY = True
     isO = True
-    isI = True
 
     for num in range(1, 5):
 
@@ -51,12 +52,6 @@ def checkSigns(img):
                 or (abs(thumb.landmarks[1].y-index.landmarks[1].y) > 0.18)):
             isO = False
 
-            # Checking for I
-        if((thumb.landmarks[1].y < index.landmarks[4].y) or (thumb.landmarks[1].y < middle.landmarks[4].y)
-           or (thumb.landmarks[1].y < ring.landmarks[4].y) or pinky.landmarks[1].y > thumb.landmarks[1].y or
-           abs(pinky.landmarks[1].y-pinky.landmarks[4].y < 0.15) or abs(thumb.landmarks[1].y-thumb.landmarks[4].y < 0.15)):
-            isY = False
-
     if (isC):
         # print("Letter C")
         cv2.putText(img, "C", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
@@ -78,53 +73,13 @@ def checkSigns(img):
         cv2.putText(img, "O", (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0),
                     3)
 
+'''
 
-def main():
 
-    # captures video from webcam
-    # NOTE: input value can vary between -1, 0, 1, 2 (differs per device, 0 or 1 is common)
-    # WARNING: VideoCapture does not work if another application is using camera (ie. video calling)
-    cap = cv2.VideoCapture(0)
+# In main
 
-    # from pre-trained Mediapipe to draw hand landmarks and connections
-    mpHands = mp.solutions.hands
-    hands = mpHands.Hands(max_num_hands=1)
-    mpDraw = mp.solutions.drawing_utils
-
-    # used to calculate FPS
-    pTime = 0  # previous time
-    cTime = 0  # current time
-    counter = 0
-
-    while True:
-        # reads image from webcam
-        success, img = cap.read()
-
-        # converts default image value to RGB value
-        # NOTE: when printing back to the screen, use default value (img) NOT imgRGB
-        imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        imgRGB.flags.writeable = False  # improves performance
-        # use Mediapipe to process converted RGB value
-        results = hands.process(imgRGB)
-
-        if results.multi_hand_landmarks:
-
-            for handLms in results.multi_hand_landmarks:
-                # creates list of all landmarks for easier indexing
-                # list will have 21 values -> lmList[0] will be first landmark
-                lmList = []
-
-                # id corresponds to landmark #
-                #   -> 21 landmarks in total (4 on non-thumb fingers, rest on thumb and palm)
-                # lm corresponds to landmark value
-                #   -> each lm has x coordinate and y coordinate
-                #   -> default values are in ratio (value between 0 and 1)
-                #   -> to convert to pixel value, multiple by width and height of screen
-                for id, lm in enumerate(handLms.landmark):
-                    h, w, c = img.shape                 # get height, width, depth
-                    # convert to x, y pixel values
-                    cx, cy = int(lm.x*w), int(lm.y*h)
-                    counter += 1
+''' 
+  counter += 1
                 # Landmarks on the thumb
                     if (id > 0 and id < 5):
                         thumb.landmarks[id] = Landmark(id, lm.x, lm.y, lm.z)
@@ -165,28 +120,4 @@ def main():
 
                     if (counter > 30):
                         checkSigns(img)
-                    lmList.append([id, cx, cy])
-
-                # draw hand landmarks and connections
-                mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
-
-        # print FPS on screen (not console)
-        # cTime = time.time()
-        # fps = 1/(cTime-pTime)
-        # pTime = cTime
-        # cv2.putText(img, str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,255), 3)
-
-        # print current image captured from webcam
-        cv2.imshow("Image", img)
-        key = cv2.waitKey(1)
-
-        # press Q to quit or "stop" button
-        if key == ord("q"):
-            break
-
-    # cleanup
-    cap.release()
-    cv2.destroyAllWindows()
-
-
-main()
+'''
