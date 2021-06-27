@@ -2,6 +2,7 @@ import cv2
 import mediapipe as mp
 import time
 from Finger import Finger
+from interpretation import interpret
 
 
 def main():
@@ -42,8 +43,8 @@ def main():
 
             for handLms in results.multi_hand_landmarks:
                 # creates list of all landmarks for easier indexing
-                # list will have 21 values -> lmList[0] will be first landmark
-                lmList = []
+                # list will have 21 values -> lm_list[0] will be first landmark
+                lm_list = []
 
                 # id corresponds to landmark #
                 #   -> 21 landmarks in total (4 on non-thumb fingers, rest on thumb and palm)
@@ -54,9 +55,12 @@ def main():
                 for id, lm in enumerate(handLms.landmark):
                     h, w, c = img.shape                 # get height, width, depth
                     # convert to x, y pixel values
-                    cx, cy = int(lm.x*w), int(lm.y*h)
+                    cx, cy, cz = int(lm.x*w), int(lm.y*h), lm.z*c
 
-                    lmList.append([id, cx, cy])
+                    lm_list.append([id, cx, cy, cz])
+
+                # writes text to screen
+                cv2.putText(img, str(interpret(lm_list)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
 
                 # draw hand landmarks and connections
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
