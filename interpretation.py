@@ -69,6 +69,28 @@ def analyzePinkyFinger(lmList):
         return 2
     return 1
 
+
+def checkLetters_L_X_Y(lmList):
+    """
+    :param lmList: landmark of 21 landmarks
+    :return: one of "L", "X", "Y" - all have same non-thumb finger positions (2, 0, 0, 0)
+    """
+    INDEX_TIP = lmList[8]
+    INDEX_DIP = lmList[7]
+    INDEX_PIP = lmList[6]
+    INDEX_MCP = lmList[5]
+    THUMB_TIP = lmList[4]
+
+    if INDEX_TIP[2] < INDEX_DIP[2]:
+        if THUMB_TIP[1] > INDEX_MCP[1]:
+            return "D"
+        else:
+            return "L"
+    elif (abs(INDEX_TIP[2] - INDEX_DIP[2]) < VERTICAL_ERROR_MARGIN or abs(INDEX_TIP[2] - INDEX_PIP[2])) and THUMB_TIP[1] > INDEX_MCP[1]:
+        return "X"
+    return ""
+
+
 def interpret(lmList):
     fingerPositions = createPositionTuple(lmList)
     if fingerPositions == (2, 2, 2, 2):
