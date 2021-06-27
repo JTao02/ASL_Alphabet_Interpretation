@@ -7,6 +7,12 @@ from interpretation import interpret
 def add_space(text):
     return text + " "
 
+def delete(text):
+    return text[:-1]
+
+def clear(text):
+    return ""
+    
 def main():
 
     # Finger objects
