@@ -57,7 +57,7 @@ def main():
                     # convert to x, y pixel values
                     cx, cy = int(lm.x*w), int(lm.y*h)
 
-                    lm_list.append([id, cx, cy])
+                    lm_list.append([id, cx, cy, lm.z])
 
                 # writes text to screen
                 cv2.putText(img, str(interpret(lm_list)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
