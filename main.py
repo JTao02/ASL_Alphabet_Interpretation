@@ -25,8 +25,14 @@ def main():
     mpDraw = mp.solutions.drawing_utils
 
     # used to calculate FPS
-    pTime = 0  # previous time
-    cTime = 0  # current time
+    # pTime = 0  # previous time
+    # cTime = 0  # current time
+
+    # used to record letter every 3 seconds hand is in frame
+    prev_time = time.time()
+    curr_time = time.time()
+
+    letters = ""
 
     while True:
         # reads image from webcam
@@ -65,6 +71,33 @@ def main():
                 # draw hand landmarks and connections
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
 
+                # countdown timer
+                curr_time = time.time()
+                diff_time = curr_time - prev_time
+                if diff_time < 1:
+                    display_time = 3
+                elif diff_time < 2:
+                    display_time = 2
+                elif diff_time <= 3:
+                    display_time = 1
+                cv2.putText(img, str(display_time), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,255), 3)
+        else:
+            # reset timer when hand not in frame
+            prev_time = time.time()
+        
+        # capture letter of hand every three seconds
+        curr_time = time.time()
+        if curr_time - prev_time > 3:
+            try:
+                letters += interpret(lm_list)
+            except TypeError:
+                pass
+            cv2.putText(img, "captured", (400,450), cv2.FONT_HERSHEY_PLAIN, 3, (66, 245, 102), 3)
+            prev_time = time.time()
+        
+        cv2.putText(img, letters, (30,100), cv2.FONT_HERSHEY_PLAIN, 3, (66, 245, 102), 3)
+
+        
         # print FPS on screen (not console)
         # cTime = time.time()
         # fps = 1/(cTime-pTime)
