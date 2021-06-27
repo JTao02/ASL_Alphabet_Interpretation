@@ -13,6 +13,7 @@ The **ASL Transcriber** aims to begin bridging the gap between disabilities and 
 - **OpenCV:** A Python module to capture real-time webcam data for ASL analysis.
 - **Mediapipe (Hand Module):** A machine learning solution to infer twenty-one 3D landmarks of a hand from a single frame, developed by Google.
 - **Flask:** A lightweight Python framework to provide a frontend for the application.
+- **Heroku:** A cloud application platform to deploy the application.
 
 <br>
 
