@@ -186,7 +186,7 @@ def interpret(lm_list) -> 'string':
 
     if fingerPositions == (2, 2, 2, 2):
         # B
-        return checkLetters_B_C(lm_list)
+        return "B"
     elif fingerPositions == (2, 2, 2, 0):
         # W
         return "W"
@@ -340,13 +340,3 @@ def checkLetters_E_O(lm_list):
         return "E"
 
     return ""
-
-
-def checkLetters_B_C(lm_list):
-    THUMB_TIP = lm_list[4]
-    INDEX_FINGER_TIP = lm_list[8]
-
-    if THUMB_TIP[2] > INDEX_FINGER_TIP[2]:
-        return "B"
-    else:
-        return "C"
