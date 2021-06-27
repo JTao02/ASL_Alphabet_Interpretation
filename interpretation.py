@@ -75,39 +75,39 @@ def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Fing
     for id, lm in enumerate(lm_list):
 
         # landmarks on the thumb
-        if (id > 0 and id < 5):
+        if (id >= 1 and id <= 4):
             finger_num = id - 1
             THUMB.landmarks[finger_num] = Landmark(id, lm[1], lm[2], lm[3])
-            # print("Finger: Thumb: ", "Landmark: ", THUMB.landmark[id].id, "x:",
-            #         THUMB.landmark[id].x, "y:", THUMB.landmark[id].y, "z: ", THUMB.landmark[id].z,)
+            print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
+                    THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
 
         # landmarks on index
-        elif (id > 4 and id < 9):
+        elif (id >= 5 and id <= 8):
             finger_num = id - 5
             INDEX.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
-            # print("Finger: index: ", "landmark: ", INDEX.landmarks[finger_num].id, "x:",
-            #         INDEX.landmarks[finger_num].x, "y:", INDEX.landmarks[finger_num].y, "z: ", INDEX.landmarks[finger_num].z,)
+            print("Finger: index: ", "landmark: ", INDEX.landmarks[finger_num].id, "x:",
+                    INDEX.landmarks[finger_num].x, "y:", INDEX.landmarks[finger_num].y, "z: ", INDEX.landmarks[finger_num].z,)
 
         # landmarks on middle
-        elif (id > 8 and id < 13):
+        elif (id >= 9 and id <= 12):
             finger_num = id - 9
             MIDDLE.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
-            # print("Finger: middle: ", "landmark: ", MIDDLE.landmarks[finger_num].id, "x:",
-            #         MIDDLE.landmarks[finger_num].x, "y:", MIDDLE.landmarks[finger_num].y, "z: ", MIDDLE.landmarks[finger_num].z,)
+            print("Finger: middle: ", "landmark: ", MIDDLE.landmarks[finger_num].id, "x:",
+                    MIDDLE.landmarks[finger_num].x, "y:", MIDDLE.landmarks[finger_num].y, "z: ", MIDDLE.landmarks[finger_num].z,)
 
         # landmarks on fourth finger
-        elif (id > 12 and id < 17):
-            finger_num = id - 24
+        elif (id >= 13 and id <= 16):
+            finger_num = id - 13
             RING.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
-            # print("Finger: ring: ", "landmark: ", RING.landmarks[finger_num].id, "x:",
-            #         RING.landmarks[finger_num].x, "y:", RING.landmarks[finger_num].y, "z: ", RING.landmarks[finger_num].z,)
+            print("Finger: ring: ", "landmark: ", RING.landmarks[finger_num].id, "x:",
+                    RING.landmarks[finger_num].x, "y:", RING.landmarks[finger_num].y, "z: ", RING.landmarks[finger_num].z,)
 
         # landmarks on fifth finger
-        else:
+        elif (id >= 17 and id <= 20):
             finger_num = id - 17
             PINKY.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
-            # print("Finger: pinky: ", "landmark: ", PINKY.landmark[finger_num].id, "x:",
-            #         PINKY.landmarks[finger_num].x, "y:", PINKY.landmarks[finger_num].y, "z: ", PINKY.landmarks[finger_num].z,)
+            print("Finger: pinky: ", "landmark: ", PINKY.landmarks[finger_num].id, "x:",
+                    PINKY.landmarks[finger_num].x, "y:", PINKY.landmarks[finger_num].y, "z: ", PINKY.landmarks[finger_num].z,)
 
 def interpret(lm_list) -> 'string':
 
@@ -129,6 +129,7 @@ def interpret(lm_list) -> 'string':
     elif fingerPositions == (2, 2, 0, 0):
         # If depth of middle finger is closer to camera:
         # K
+
         # If index tip is crossing middle tip:
         # R
         # If index tip is near middle tip:
@@ -177,6 +178,19 @@ def interpret(lm_list) -> 'string':
         #G and H
         pass
 
+def checkLetters_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
+    if MIDDLE.landmarks[3].z < INDEX.landmarks[3].z:
+        return "K"
+#     elif abs(INDEX.landmarks[3].x - MIDDLE.landmarks[3].x > )
+# if((abs(index.landmarks[num].x-middle.landmarks[num].x) > 0.07) or (abs(index.landmarks[num].y-middle.landmarks[num].y) > 0.04)
+#             or (abs(index.landmarks[num].y-middle.landmarks[num].y) < 0.003) or
+#            (abs(index.landmarks[4].y-ring.landmarks[4].y) < 0.1) or (abs(index.landmarks[4].x-middle.landmarks[4].x)) > 0.05):
+#             isU = False
+
+#             # Checking for V
+#         if((abs(index.landmarks[num].y-middle.landmarks[num].y) > 0.06) or
+#            (abs(index.landmarks[4].y-ring.landmarks[4].y) < 0.1) or (abs(index.landmarks[4].x-middle.landmarks[4].x)) < 0.05):
+#             isV = False
 
 def checkLetters_L_X_Y(lm_list):
     """
