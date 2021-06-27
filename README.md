@@ -32,7 +32,7 @@ git clone https://github.com/JTao02/ASL_Alphabet_Interpretation.git
 Once it's cloned, install the dependencies in the requirements.txt:
 
 ```
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 The project can now be run locally!
