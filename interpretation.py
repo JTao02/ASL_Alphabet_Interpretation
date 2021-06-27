@@ -74,6 +74,58 @@ def analyzePinkyFinger(lm_list):
     return 1
 
 
+def analyzeIndexFingerH(lm_list):
+    INDEX_FINGER_TIP = lm_list[8]
+    INDEX_FINGER_DIP = lm_list[7]
+    INDEX_FINGER_MCP = lm_list[5]
+
+    if INDEX_FINGER_TIP[1] > INDEX_FINGER_MCP[1] or abs(
+            INDEX_FINGER_TIP[1] - INDEX_FINGER_MCP[1]) < VERTICAL_ERROR_MARGIN:
+        return 0
+    elif INDEX_FINGER_TIP[1] < INDEX_FINGER_DIP[1]:
+        return 2
+    return 1
+
+
+def analyzeMiddleFingerH(lm_list):
+    MIDDLE_FINGER_TIP = lm_list[12]
+    MIDDLE_FINGER_DIP = lm_list[11]
+    MIDDLE_FINGER_MCP = lm_list[9]
+
+    if MIDDLE_FINGER_TIP[1] > MIDDLE_FINGER_MCP[1] or abs(
+            MIDDLE_FINGER_TIP[1] - MIDDLE_FINGER_MCP[1]) < VERTICAL_ERROR_MARGIN:
+        return 0
+    elif MIDDLE_FINGER_TIP[1] < MIDDLE_FINGER_DIP[1]:
+        return 2
+    return 1
+
+
+def analyzeRingFingerH(lm_list):
+    RING_FINGER_TIP = lm_list[16]
+    RING_FINGER_DIP = lm_list[15]
+    RING_FINGER_MCP = lm_list[13]
+
+    if RING_FINGER_TIP[1] > RING_FINGER_MCP[1] or abs(
+            RING_FINGER_TIP[1] - RING_FINGER_MCP[1]) < VERTICAL_ERROR_MARGIN:
+        return 0
+    elif RING_FINGER_TIP[1] < RING_FINGER_DIP[1]:
+        return 2
+    return 1
+
+
+def analyzePinkyFingerH(lm_list):
+    PINKY_FINGER_TIP = lm_list[20]
+    PINKY_FINGER_DIP = lm_list[19]
+    PINKY_FINGER_MCP = lm_list[17]
+
+    if PINKY_FINGER_TIP[1] > PINKY_FINGER_MCP[1] or abs(
+            PINKY_FINGER_TIP[1] - PINKY_FINGER_MCP[1]) < VERTICAL_ERROR_MARGIN:
+        return 0
+    elif PINKY_FINGER_TIP[1] < PINKY_FINGER_DIP[1]:
+        return 2
+    return 1
+
+
 def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
     for id, lm in enumerate(lm_list):
 
@@ -124,11 +176,10 @@ def interpret(lm_list) -> 'string':
     MIDDLE = Finger()
     RING = Finger()
     PINKY = Finger()
+
     preprocess(lm_list, THUMB, INDEX, MIDDLE, RING, PINKY)
 
     fingerPositions = createPositionTuple(lm_list)
-
-    print(lm_list[1],  " ",  lm_list[2],  " ", lm_list[3],  " ", lm_list[4])
 
     if fingerPositions == (2, 2, 2, 2):
         # B
@@ -177,19 +228,16 @@ def interpret(lm_list) -> 'string':
         # Else: (Might need to change to t being behind index finger)
         # T
         pass
-
     else:
-        # C and O
-        # P and Q
-        # G and H
-        pass
+        if(checkLetters_G_H(lm_list, fingerPositions) != ""):
+            return checkLetters_G_H(lm_list, fingerPositions)
 
 
 def checkLetters_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
-    #if (INDEX.landmarks[3].z - MIDDLE.landmarks[3].z) > 0.1:
+    # if (INDEX.landmarks[3].z - MIDDLE.landmarks[3].z) > 0.1:
     if abs(MIDDLE.landmarks[3].y - INDEX.landmarks[2].y) < 30:
         return "K"
-    elif ((INDEX.landmarks[0].x > MIDDLE.landmarks[0].x and INDEX.landmarks[3].x < MIDDLE.landmarks[3].x) 
+    elif ((INDEX.landmarks[0].x > MIDDLE.landmarks[0].x and INDEX.landmarks[3].x < MIDDLE.landmarks[3].x)
             or (INDEX.landmarks[0].x < MIDDLE.landmarks[0].x and INDEX.landmarks[3].x > MIDDLE.landmarks[3].x)):
         return "R"
     elif abs(INDEX.landmarks[3].x - MIDDLE.landmarks[3].x) < 60:
@@ -229,7 +277,16 @@ def checkLetters_A_S_T(lm_list):
         return "A"
     elif (THUMB_TIP[1] > MIDDLE_FINGER_DIP[1]):
         return "S"
-    elif (THUMB_TIP[1] > INDEX_DIP[1] and THUMB_TIP[1] < MIDDLE_FINGER_DIP[1]):
+    elif (THUMB_TIP[1] > INDEX_DIP[1] and THUMB_TIP[1] < MIDDLE_FINGER_DIP[1]) and analyzeIndexFingerH(lm_list) != 2:
         return "T"
+
+    return ""
+
+
+def checkLetters_G_H(lm_list, fingerPositions):
+    if analyzeMiddleFingerH(lm_list) == 2 and analyzeIndexFingerH(lm_list) == 2 and analyzeIndexFinger(lm_list) <= 1 or analyzeMiddleFinger(lm_list) <= 1:
+        return "H"
+    elif analyzeIndexFingerH(lm_list) == 2 and analyzeIndexFinger(lm_list) <= 1:
+        return "G"
 
     return ""
