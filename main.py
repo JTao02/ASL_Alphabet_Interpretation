@@ -45,6 +45,7 @@ def main():
     while True:
         # reads image from webcam
         _, img = cap.read()
+        h, w, c = img.shape                 # get height, width, depth
 
         # converts default image value to RGB value
         # NOTE: when printing back to the screen, use default value (img) NOT imgRGB
@@ -67,14 +68,13 @@ def main():
                 #   -> default values are in ratio (value between 0 and 1)
                 #   -> to convert to pixel value, multiple by width and height of screen
                 for id, lm in enumerate(handLms.landmark):
-                    h, w, c = img.shape                 # get height, width, depth
                     # convert to x, y pixel values
                     cx, cy, cz = int(lm.x*w), int(lm.y*h), lm.z*c
 
                     lm_list.append([id, cx, cy, cz])
 
                 # writes text to screen
-                cv2.putText(img, str(interpret(lm_list)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
+                cv2.putText(img, str(interpret(lm_list)), (w-300, 70), cv2.FONT_HERSHEY_DUPLEX, 3, (52, 195, 235), 3)
 
                 # draw hand landmarks and connections
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
@@ -88,7 +88,7 @@ def main():
                     display_time = 2
                 elif diff_time <= 3:
                     display_time = 1
-                cv2.putText(img, str(display_time), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,255), 3)
+                cv2.putText(img, str(display_time), (10,70), cv2.FONT_HERSHEY_DUPLEX, 3, (0,0,255), 3)
         else:
             # reset timer when hand not in frame
             prev_time = time.time()
@@ -100,10 +100,10 @@ def main():
                 letters += interpret(lm_list)
             except TypeError:
                 pass
-            cv2.putText(img, "captured", (400,450), cv2.FONT_HERSHEY_PLAIN, 3, (66, 245, 102), 3)
+            cv2.putText(img, "captured", (w//2 - 200,h//2), cv2.FONT_HERSHEY_DUPLEX, 3, (235, 107, 52), 3)
             prev_time = time.time()
         
-        cv2.putText(img, letters, (30,100), cv2.FONT_HERSHEY_PLAIN, 3, (66, 245, 102), 3)
+        cv2.putText(img, letters, (10, h - 50), cv2.FONT_HERSHEY_DUPLEX, 3, (235, 143, 52), 3)
 
         
         # print FPS on screen (not console)
