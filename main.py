@@ -1,14 +1,20 @@
 from flask import Flask, render_template, Response
 from Camera import Camera
 
+app = Flask(__name__)
+
+
 def add_space(text):
     return text + " "
+
 
 def delete(text):
     return text[:-1]
 
+
 def clear(text):
     return ""
+
 
 def gen(camera):
     while True:
@@ -19,10 +25,20 @@ def gen(camera):
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
 
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(Camera()),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+# if __name__ == "__main__":
+#     app.run(host='0.0.0.0', debug=True)
 
 # def main():
 
@@ -96,7 +112,7 @@ def video_feed():
 #         else:
 #             # reset timer when hand not in frame
 #             prev_time = time.time()
-        
+
 #         # capture letter of hand every three seconds
 #         curr_time = time.time()
 #         if curr_time - prev_time > 3:
@@ -106,10 +122,10 @@ def video_feed():
 #                 pass
 #             cv2.putText(img, "captured", (400,450), cv2.FONT_HERSHEY_PLAIN, 3, (66, 245, 102), 3)
 #             prev_time = time.time()
-        
+
 #         cv2.putText(img, letters, (30,100), cv2.FONT_HERSHEY_PLAIN, 3, (66, 245, 102), 3)
 
-        
+
 #         # print FPS on screen (not console)
 #         # cTime = time.time()
 #         # fps = 1/(cTime-pTime)
