@@ -2,7 +2,7 @@
 
 ## 💡 Motivation
 
-Nowadays, our dependence on technology has become increasingly evident, especially with the recent circumstances that have propelled the era of online education and remote work. It is estimated that over 5% of the world's population (~432 million adults/34 million children), and that by 2050, over 700 million people (1 in every 10!) will have disabling hearing loss (WHO, 2020).
+Nowadays, our dependence on technology has become increasingly evident, especially with the recent circumstances that have propelled us to the era of online education and remote work. It is also estimated that over 5% of the world's population (~432 million adults/34 million children), and that by 2050, over 700 million people (1 in every 10!) will have disabling hearing loss (WHO, 2020).
 
 The **ASL Transcriber** aims to begin bridging the gap between disabilities and online services by **using computer vision to transcribe a user's signing and converts it to the English alphabet counterpart**. This provides a flexible alternative to typing a message out using the keyboard that is more engaging and dynamic for both the signer and the audience.
 

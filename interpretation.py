@@ -132,9 +132,11 @@ def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Fing
         # landmarks on the thumb
         if (id >= 1 and id <= 4):
             finger_num = id - 1
-            THUMB.landmarks[finger_num] = Landmark(id, lm[1], lm[2], lm[3])
-           # print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
-            #      THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
+
+            THUMB.landmarks[finger_num] = Landmark(
+                finger_num, lm[1], lm[2], lm[3])
+            print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
+                  THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
 
         # landmarks on index
         elif (id >= 5 and id <= 8):
@@ -197,10 +199,15 @@ def interpret(lm_list) -> 'string':
         # U
         # Else:
         # V
-        return checkLetters_K_R_U_V(THUMB, INDEX, MIDDLE, RING, PINKY)
-
+        return check_K_R_U_V(THUMB, INDEX, MIDDLE, RING, PINKY)
     elif fingerPositions == (2, 0, 0, 0):
-        return checkLetters_L_X_Y(lm_list)
+        # If thumb out:
+        # L
+        # If landmark 8 is lower than 7
+        # X
+        # Else
+        # D
+        return check_L_X_D(lm_list)
     elif fingerPositions == (0, 2, 2, 2):
         # F
         return "F"
@@ -209,7 +216,7 @@ def interpret(lm_list) -> 'string':
         #     Y
         # Else
         #     I
-        pass
+        return check_Y_I(THUMB, INDEX, MIDDLE, RING, PINKY)
     elif fingerPositions == (1, 1, 1, 1):
         # E
         return "E"
@@ -220,20 +227,19 @@ def interpret(lm_list) -> 'string':
         # N
         return "N"
     elif fingerPositions == (0, 0, 0, 0):
-        return checkLetters_A_S_T(lm_list)
+        return check_A_S_T(lm_list)
         # If thumb right of index finger:
         # A
         # If thumb is horizontal:
         # S
         # Else: (Might need to change to t being behind index finger)
         # T
-        pass
     else:
         if(checkLetters_G_H(lm_list, fingerPositions) != ""):
             return checkLetters_G_H(lm_list, fingerPositions)
 
 
-def checkLetters_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
+def check_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
     # if (INDEX.landmarks[3].z - MIDDLE.landmarks[3].z) > 0.1:
     if abs(MIDDLE.landmarks[3].y - INDEX.landmarks[2].y) < 30:
         return "K"
@@ -246,7 +252,7 @@ def checkLetters_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Fin
         return "V"
 
 
-def checkLetters_L_X_Y(lm_list):
+def check_L_X_D(lm_list):
     """
     :param lm_list: landmark of 21 landmarks
     :return: one of "L", "X", "Y" - all have same non-thumb finger positions (2, 0, 0, 0)
@@ -267,7 +273,14 @@ def checkLetters_L_X_Y(lm_list):
     return ""
 
 
-def checkLetters_A_S_T(lm_list):
+def check_Y_I(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
+    if(abs(THUMB.landmarks[3].x - THUMB.landmarks[0].x) > 40):
+        return "Y"
+    else:
+        return "I"
+
+
+def check_A_S_T(lm_list):
     THUMB_TIP = lm_list[4]
     INDEX_TIP = lm_list[8]
     MIDDLE_FINGER_DIP = lm_list[11]
