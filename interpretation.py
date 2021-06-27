@@ -73,43 +73,39 @@ def analyzePinkyFinger(lm_list):
 
 def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
     for id, lm in enumerate(lm_list):
-        # # get height, width, depth or color(?)
-        # h, w, c = img.shape
-        # # convert to x and y pixel values
-        # cx, cy = int(lm.x*w), int(lm.y*h)
 
         # landmarks on the thumb
         if (id > 0 and id < 5):
             finger_num = id - 1
-            THUMB.landmarks[finger_num] = Landmark(id, lm.x, lm.y, lm.z)
+            THUMB.landmarks[finger_num] = Landmark(id, lm[1], lm[2], lm[3])
             # print("Finger: Thumb: ", "Landmark: ", THUMB.landmark[id].id, "x:",
             #         THUMB.landmark[id].x, "y:", THUMB.landmark[id].y, "z: ", THUMB.landmark[id].z,)
 
         # landmarks on index
         elif (id > 4 and id < 9):
             finger_num = id - 5
-            INDEX.landmarks[finger_num] = Landmark(finger_num, lm.x, lm.y, lm.z)
+            INDEX.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
             # print("Finger: index: ", "landmark: ", INDEX.landmarks[finger_num].id, "x:",
             #         INDEX.landmarks[finger_num].x, "y:", INDEX.landmarks[finger_num].y, "z: ", INDEX.landmarks[finger_num].z,)
 
         # landmarks on middle
         elif (id > 8 and id < 13):
             finger_num = id - 9
-            MIDDLE.landmarks[finger_num] = Landmark(finger_num, lm.x, lm.y, lm.z)
+            MIDDLE.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
             # print("Finger: middle: ", "landmark: ", MIDDLE.landmarks[finger_num].id, "x:",
             #         MIDDLE.landmarks[finger_num].x, "y:", MIDDLE.landmarks[finger_num].y, "z: ", MIDDLE.landmarks[finger_num].z,)
 
         # landmarks on fourth finger
         elif (id > 12 and id < 17):
             finger_num = id - 24
-            RING.landmarks[finger_num] = Landmark(finger_num, lm.x, lm.y, lm.z)
+            RING.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
             # print("Finger: ring: ", "landmark: ", RING.landmarks[finger_num].id, "x:",
             #         RING.landmarks[finger_num].x, "y:", RING.landmarks[finger_num].y, "z: ", RING.landmarks[finger_num].z,)
 
         # landmarks on fifth finger
         else:
             finger_num = id - 17
-            PINKY.landmarks[finger_num] = Landmark(finger_num, lm.x, lm.y, lm.z)
+            PINKY.landmarks[finger_num] = Landmark(finger_num, lm[1], lm[2], lm[3])
             # print("Finger: pinky: ", "landmark: ", PINKY.landmark[finger_num].id, "x:",
             #         PINKY.landmarks[finger_num].x, "y:", PINKY.landmarks[finger_num].y, "z: ", PINKY.landmarks[finger_num].z,)
 
