@@ -81,40 +81,40 @@ def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Fing
         if (id >= 1 and id <= 4):
             finger_num = id - 1
             THUMB.landmarks[finger_num] = Landmark(id, lm[1], lm[2], lm[3])
-            print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
-                  THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
+            # print("Finger: Thumb: ", "landmark: ", THUMB.landmarks[finger_num].id, "x:",
+            #       THUMB.landmarks[finger_num].x, "y:", THUMB.landmarks[finger_num].y, "z: ", THUMB.landmarks[finger_num].z,)
 
         # landmarks on index
         elif (id >= 5 and id <= 8):
             finger_num = id - 5
             INDEX.landmarks[finger_num] = Landmark(
                 finger_num, lm[1], lm[2], lm[3])
-            print("Finger: index: ", "landmark: ", INDEX.landmarks[finger_num].id, "x:",
-                  INDEX.landmarks[finger_num].x, "y:", INDEX.landmarks[finger_num].y, "z: ", INDEX.landmarks[finger_num].z,)
+            # print("Finger: index: ", "landmark: ", INDEX.landmarks[finger_num].id, "x:",
+            #       INDEX.landmarks[finger_num].x, "y:", INDEX.landmarks[finger_num].y, "z: ", INDEX.landmarks[finger_num].z,)
 
         # landmarks on middle
         elif (id >= 9 and id <= 12):
             finger_num = id - 9
             MIDDLE.landmarks[finger_num] = Landmark(
                 finger_num, lm[1], lm[2], lm[3])
-            print("Finger: middle: ", "landmark: ", MIDDLE.landmarks[finger_num].id, "x:",
-                  MIDDLE.landmarks[finger_num].x, "y:", MIDDLE.landmarks[finger_num].y, "z: ", MIDDLE.landmarks[finger_num].z,)
+            # print("Finger: middle: ", "landmark: ", MIDDLE.landmarks[finger_num].id, "x:",
+            #       MIDDLE.landmarks[finger_num].x, "y:", MIDDLE.landmarks[finger_num].y, "z: ", MIDDLE.landmarks[finger_num].z,)
 
         # landmarks on fourth finger
         elif (id >= 13 and id <= 16):
             finger_num = id - 13
             RING.landmarks[finger_num] = Landmark(
                 finger_num, lm[1], lm[2], lm[3])
-            print("Finger: ring: ", "landmark: ", RING.landmarks[finger_num].id, "x:",
-                  RING.landmarks[finger_num].x, "y:", RING.landmarks[finger_num].y, "z: ", RING.landmarks[finger_num].z,)
+            # print("Finger: ring: ", "landmark: ", RING.landmarks[finger_num].id, "x:",
+            #       RING.landmarks[finger_num].x, "y:", RING.landmarks[finger_num].y, "z: ", RING.landmarks[finger_num].z,)
 
         # landmarks on fifth finger
         elif (id >= 17 and id <= 20):
             finger_num = id - 17
             PINKY.landmarks[finger_num] = Landmark(
                 finger_num, lm[1], lm[2], lm[3])
-            print("Finger: pinky: ", "landmark: ", PINKY.landmarks[finger_num].id, "x:",
-                  PINKY.landmarks[finger_num].x, "y:", PINKY.landmarks[finger_num].y, "z: ", PINKY.landmarks[finger_num].z,)
+            # print("Finger: pinky: ", "landmark: ", PINKY.landmarks[finger_num].id, "x:",
+            #       PINKY.landmarks[finger_num].x, "y:", PINKY.landmarks[finger_num].y, "z: ", PINKY.landmarks[finger_num].z,)
 
 
 def checkLetters_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
