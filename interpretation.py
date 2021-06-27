@@ -5,10 +5,10 @@ VERTICAL_ERROR_MARGIN = 10 # FOR FOUR FINGERS: number of pixels allowed to be co
 #   -> 0: finger is all the way down
 #   -> 2: finger is all the way up
 #   -> 1: finger is between up and down (in the middle) 
-def analyzeIndexFinger(lm_list):
-    INDEX_FINGER_TIP = lm_list[8]
-    INDEX_FINGER_DIP = lm_list[7]
-    INDEX_FINGER_MCP = lm_list[5]
+def analyzeIndexFinger(lmList):
+    INDEX_FINGER_TIP = lmList[8]
+    INDEX_FINGER_DIP = lmList[7]
+    INDEX_FINGER_MCP = lmList[5]
 
     if INDEX_FINGER_TIP[2] > INDEX_FINGER_MCP[2] or abs(
             INDEX_FINGER_TIP[2] - INDEX_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -18,10 +18,10 @@ def analyzeIndexFinger(lm_list):
     return 1
 
 
-def analyzeMiddleFinger(lm_list):
-    MIDDLE_FINGER_TIP = lm_list[12]
-    MIDDLE_FINGER_DIP = lm_list[11]
-    MIDDLE_FINGER_MCP = lm_list[9]
+def analyzeMiddleFinger(lmList):
+    MIDDLE_FINGER_TIP = lmList[12]
+    MIDDLE_FINGER_DIP = lmList[11]
+    MIDDLE_FINGER_MCP = lmList[9]
 
     if MIDDLE_FINGER_TIP[2] > MIDDLE_FINGER_MCP[2] or abs(
             MIDDLE_FINGER_TIP[2] - MIDDLE_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -31,10 +31,10 @@ def analyzeMiddleFinger(lm_list):
     return 1
 
 
-def analyzeRingFinger(lm_list):
-    RING_FINGER_TIP = lm_list[16]
-    RING_FINGER_DIP = lm_list[15]
-    RING_FINGER_MCP = lm_list[13]
+def analyzeRingFinger(lmList):
+    RING_FINGER_TIP = lmList[16]
+    RING_FINGER_DIP = lmList[15]
+    RING_FINGER_MCP = lmList[13]
 
     if RING_FINGER_TIP[2] > RING_FINGER_MCP[2] or abs(
             RING_FINGER_TIP[2] - RING_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -44,10 +44,10 @@ def analyzeRingFinger(lm_list):
     return 1
 
 
-def analyzePinkyFinger(lm_list):
-    PINKY_FINGER_TIP = lm_list[20]
-    PINKY_FINGER_DIP = lm_list[19]
-    PINKY_FINGER_MCP = lm_list[17]
+def analyzePinkyFinger(lmList):
+    PINKY_FINGER_TIP = lmList[20]
+    PINKY_FINGER_DIP = lmList[19]
+    PINKY_FINGER_MCP = lmList[17]
 
     if PINKY_FINGER_TIP[2] > PINKY_FINGER_MCP[2] or abs(
             PINKY_FINGER_TIP[2] - PINKY_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:

@@ -11,7 +11,7 @@ def main():
 
     # from pre-trained Mediapipe to draw hand landmarks and connections
     mpHands = mp.solutions.hands
-    hands = mpHands.Hands()
+    hands = mpHands.Hands(max_num_hands=1)
     mpDraw = mp.solutions.drawing_utils
 
     # used to calculate FPS
