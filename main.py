@@ -55,7 +55,7 @@ def main():
                 for id, lm in enumerate(handLms.landmark):
                     h, w, c = img.shape                 # get height, width, depth
                     # convert to x, y pixel values
-                    cx, cy, cz = int(lm.x*w), int(lm.y*h), int(lm.z*c)
+                    cx, cy, cz = int(lm.x*w), int(lm.y*h), lm.z*c
 
                     lm_list.append([id, cx, cy, cz])
 
