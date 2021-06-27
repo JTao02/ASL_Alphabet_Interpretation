@@ -3,7 +3,7 @@ from Landmark import Landmark
 
 VERTICAL_ERROR_MARGIN = 10 # FOR FOUR FINGERS: number of pixels allowed to be considered same "level"
 
-def createPositionTuple(lmList):
+def createPositionTuple(lm_list):
     '''
     Input: landmark list of 21 landmarks
     Output: Tuple of (IndexPosition, MiddlePosition, RingPosition, PinkyPosition)
@@ -13,17 +13,17 @@ def createPositionTuple(lmList):
        -> 2: finger is all the way up
        -> 1: finger is between up and down (in the middle) 
     '''
-    a = analyzeIndexFinger(lmList)
-    b = analyzeMiddleFinger(lmList)
-    c = analyzeRingFinger(lmList)
-    d = analyzePinkyFinger(lmList)
+    a = analyzeIndexFinger(lm_list)
+    b = analyzeMiddleFinger(lm_list)
+    c = analyzeRingFinger(lm_list)
+    d = analyzePinkyFinger(lm_list)
     return (a, b, c, d)
 
 
-def analyzeIndexFinger(lmList):
-    INDEX_FINGER_TIP = lmList[8]
-    INDEX_FINGER_DIP = lmList[7]
-    INDEX_FINGER_MCP = lmList[5]
+def analyzeIndexFinger(lm_list):
+    INDEX_FINGER_TIP = lm_list[8]
+    INDEX_FINGER_DIP = lm_list[7]
+    INDEX_FINGER_MCP = lm_list[5]
 
     if INDEX_FINGER_TIP[2] > INDEX_FINGER_MCP[2] or abs(
             INDEX_FINGER_TIP[2] - INDEX_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -33,10 +33,10 @@ def analyzeIndexFinger(lmList):
     return 1
 
 
-def analyzeMiddleFinger(lmList):
-    MIDDLE_FINGER_TIP = lmList[12]
-    MIDDLE_FINGER_DIP = lmList[11]
-    MIDDLE_FINGER_MCP = lmList[9]
+def analyzeMiddleFinger(lm_list):
+    MIDDLE_FINGER_TIP = lm_list[12]
+    MIDDLE_FINGER_DIP = lm_list[11]
+    MIDDLE_FINGER_MCP = lm_list[9]
 
     if MIDDLE_FINGER_TIP[2] > MIDDLE_FINGER_MCP[2] or abs(
             MIDDLE_FINGER_TIP[2] - MIDDLE_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -46,10 +46,10 @@ def analyzeMiddleFinger(lmList):
     return 1
 
 
-def analyzeRingFinger(lmList):
-    RING_FINGER_TIP = lmList[16]
-    RING_FINGER_DIP = lmList[15]
-    RING_FINGER_MCP = lmList[13]
+def analyzeRingFinger(lm_list):
+    RING_FINGER_TIP = lm_list[16]
+    RING_FINGER_DIP = lm_list[15]
+    RING_FINGER_MCP = lm_list[13]
 
     if RING_FINGER_TIP[2] > RING_FINGER_MCP[2] or abs(
             RING_FINGER_TIP[2] - RING_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -59,10 +59,10 @@ def analyzeRingFinger(lmList):
     return 1
 
 
-def analyzePinkyFinger(lmList):
-    PINKY_FINGER_TIP = lmList[20]
-    PINKY_FINGER_DIP = lmList[19]
-    PINKY_FINGER_MCP = lmList[17]
+def analyzePinkyFinger(lm_list):
+    PINKY_FINGER_TIP = lm_list[20]
+    PINKY_FINGER_DIP = lm_list[19]
+    PINKY_FINGER_MCP = lm_list[17]
 
     if PINKY_FINGER_TIP[2] > PINKY_FINGER_MCP[2] or abs(
             PINKY_FINGER_TIP[2] - PINKY_FINGER_MCP[2]) < VERTICAL_ERROR_MARGIN:
@@ -71,8 +71,8 @@ def analyzePinkyFinger(lmList):
         return 2
     return 1
 
-def preprocess(lmList, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
-    for id, lm in enumerate(lmList):
+def preprocess(lm_list, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
+    for id, lm in enumerate(lm_list):
         # # get height, width, depth or color(?)
         # h, w, c = img.shape
         # # convert to x and y pixel values
@@ -113,16 +113,16 @@ def preprocess(lmList, THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finge
             # print("Finger: pinky: ", "landmark: ", PINKY.landmark[finger_num].id, "x:",
             #         PINKY.landmarks[finger_num].x, "y:", PINKY.landmarks[finger_num].y, "z: ", PINKY.landmarks[finger_num].z,)
 
-def interpret(lmList) -> 'string':
+def interpret(lm_list) -> 'string':
 
     THUMB = Finger()
     INDEX = Finger()
     MIDDLE = Finger()
     RING = Finger()
     PINKY = Finger()
-    preprocess(lmList, THUMB, INDEX, MIDDLE, RING, PINKY)
+    preprocess(lm_list, THUMB, INDEX, MIDDLE, RING, PINKY)
     
-    fingerPositions = createPositionTuple(lmList)
+    fingerPositions = createPositionTuple(lm_list)
 
     if fingerPositions == (2, 2, 2, 2):
         #B
@@ -182,16 +182,16 @@ def interpret(lmList) -> 'string':
         pass
 
 
-def checkLetters_L_X_Y(lmList):
+def checkLetters_L_X_Y(lm_list):
     """
-    :param lmList: landmark of 21 landmarks
+    :param lm_list: landmark of 21 landmarks
     :return: one of "L", "X", "Y" - all have same non-thumb finger positions (2, 0, 0, 0)
     """
-    INDEX_TIP = lmList[8]
-    INDEX_DIP = lmList[7]
-    INDEX_PIP = lmList[6]
-    INDEX_MCP = lmList[5]
-    THUMB_TIP = lmList[4]
+    INDEX_TIP = lm_list[8]
+    INDEX_DIP = lm_list[7]
+    INDEX_PIP = lm_list[6]
+    INDEX_MCP = lm_list[5]
+    THUMB_TIP = lm_list[4]
 
     if INDEX_TIP[2] < INDEX_DIP[2]:
         if THUMB_TIP[1] > INDEX_MCP[1]:
