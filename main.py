@@ -4,7 +4,15 @@ import time
 from Finger import Finger
 from interpretation import interpret
 
+def add_space(text):
+    return text + " "
 
+def delete(text):
+    return text[:-1]
+
+def clear(text):
+    return ""
+    
 def main():
 
     # Finger objects
@@ -36,7 +44,7 @@ def main():
 
     while True:
         # reads image from webcam
-        success, img = cap.read()
+        _, img = cap.read()
 
         # converts default image value to RGB value
         # NOTE: when printing back to the screen, use default value (img) NOT imgRGB
