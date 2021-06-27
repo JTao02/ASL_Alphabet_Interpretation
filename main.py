@@ -33,8 +33,8 @@ def main():
 
             for handLms in results.multi_hand_landmarks:
                 # creates list of all landmarks for easier indexing
-                # list will have 21 values -> lm_list[0] will be first landmark
-                lm_list = []
+                # list will have 21 values -> lmList[0] will be first landmark
+                lmList = []
 
                 # id corresponds to landmark #
                 #   -> 21 landmarks in total (4 on non-thumb fingers, rest on thumb and palm)
@@ -46,16 +46,16 @@ def main():
                     h, w, c = img.shape                 # get height, width, depth
                     cx, cy = int(lm.x*w), int(lm.y*h) # convert to x, y pixel values
 
-                    lm_list.append([id, cx, cy])
+                    lmList.append([id, cx, cy])
 
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS) # draw hand landmarks and connections
  
 
         # print FPS on screen (not console)
-        cTime = time.time()
-        fps = 1/(cTime-pTime)
-        pTime = cTime
-        cv2.putText(img, str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,255), 3)
+        # cTime = time.time()
+        # fps = 1/(cTime-pTime)
+        # pTime = cTime
+        # cv2.putText(img, str(int(fps)), (10,70), cv2.FONT_HERSHEY_PLAIN, 3, (0,0,255), 3)
 
         # print current image captured from webcam
         cv2.imshow("Image", img)
@@ -68,6 +68,5 @@ def main():
     # cleanup
     cap.release()
     cv2.destroyAllWindows()
-
 
 main()
