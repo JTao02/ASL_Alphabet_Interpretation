@@ -41,7 +41,14 @@ The project can now be run locally!
 
 ## 🖥️ Usage
 
-To use this application, you will need a working computer and camera. There are four points of interest on the screen:
+To use this application, you will need a working computer and camera. Sit or stand at a comfortable distance away from the camera (~1-2m) and ensure lighting is fair. Position your hand in front of the camera, minimizing the depth of each of your fingers to the camera (ie. all the fingers should be a similar distance from the camera).
+
+There are four points of interest on the screen:
+
+1. Top Left: Countdown to display how many seconds are left to capture current sign.
+2. Bottom Left: Current word being formed from each subsequent signed letter.
+3. Top Right: Current letter that is being signed. This letter will be captured once the countdown reaches 0.
+4. Center: Capture word indicating that a snapshot has just been taken of the hand.
 
 1. Top Left: Countdown to display how many seconds are left to capture current sign.
 2. Bottom Left: Current word being formed from each subsequent signed letter.
