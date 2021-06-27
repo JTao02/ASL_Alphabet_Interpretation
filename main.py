@@ -60,7 +60,8 @@ def main():
                     lm_list.append([id, cx, cy, cz])
 
                 # writes text to screen
-                cv2.putText(img, str(interpret(lm_list)), (550, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
+                cv2.putText(img, str(interpret(lm_list)), (550, 70),
+                            cv2.FONT_HERSHEY_PLAIN, 3, (0, 0, 0), 3)
 
                 # draw hand landmarks and connections
                 mpDraw.draw_landmarks(img, handLms, mpHands.HAND_CONNECTIONS)
