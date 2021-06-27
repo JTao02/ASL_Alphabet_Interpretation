@@ -63,7 +63,7 @@ There are many directions that this project can be taken in, with additional fea
 
 ## 🎉 Contributions
 
-- 🤓 Jason Tao
-- 🤓 Brian Hu
-- 🤡 Terry Ju
-- 🤓 Stephen Luu
+- Jason Tao
+- Brian Hu
+- Terry Ju
+- Stephen Luu
