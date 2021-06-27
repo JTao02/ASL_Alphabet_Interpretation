@@ -136,7 +136,8 @@ def interpret(lm_list) -> 'string':
         # U
         # Else:
         # V
-        pass
+        return checkLetters_K_R_U_V(THUMB, INDEX, MIDDLE, RING, PINKY)
+
     elif fingerPositions == (2, 0, 0, 0):
         # If thumb out:
         # L
@@ -179,18 +180,16 @@ def interpret(lm_list) -> 'string':
         pass
 
 def checkLetters_K_R_U_V(THUMB: Finger, INDEX: Finger, MIDDLE: Finger, RING: Finger, PINKY: Finger):
-    if MIDDLE.landmarks[3].z < INDEX.landmarks[3].z:
+    #if (INDEX.landmarks[3].z - MIDDLE.landmarks[3].z) > 0.1:
+    if abs(MIDDLE.landmarks[3].y - INDEX.landmarks[2].y) < 30:
         return "K"
-#     elif abs(INDEX.landmarks[3].x - MIDDLE.landmarks[3].x > )
-# if((abs(index.landmarks[num].x-middle.landmarks[num].x) > 0.07) or (abs(index.landmarks[num].y-middle.landmarks[num].y) > 0.04)
-#             or (abs(index.landmarks[num].y-middle.landmarks[num].y) < 0.003) or
-#            (abs(index.landmarks[4].y-ring.landmarks[4].y) < 0.1) or (abs(index.landmarks[4].x-middle.landmarks[4].x)) > 0.05):
-#             isU = False
-
-#             # Checking for V
-#         if((abs(index.landmarks[num].y-middle.landmarks[num].y) > 0.06) or
-#            (abs(index.landmarks[4].y-ring.landmarks[4].y) < 0.1) or (abs(index.landmarks[4].x-middle.landmarks[4].x)) < 0.05):
-#             isV = False
+    elif ((INDEX.landmarks[0].x > MIDDLE.landmarks[0].x and INDEX.landmarks[3].x < MIDDLE.landmarks[3].x) 
+            or (INDEX.landmarks[0].x < MIDDLE.landmarks[0].x and INDEX.landmarks[3].x > MIDDLE.landmarks[3].x)):
+        return "R"
+    elif abs(INDEX.landmarks[3].x - MIDDLE.landmarks[3].x) < 60:
+        return "U"
+    else:
+        return "V"
 
 def checkLetters_L_X_Y(lm_list):
     """
